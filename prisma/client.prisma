@@ -1,4 +1,4 @@
-model Patient {
+model Client {
   id          String   @id @default(cuid())
 
   therapistId String

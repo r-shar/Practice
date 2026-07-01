@@ -4,5 +4,5 @@ model Therapist {
 
   createdAt DateTime @default(now())
 
-  patients  Patient[]
+  clients   Client[]
 }
