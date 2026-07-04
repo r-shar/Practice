@@ -1,6 +1,6 @@
 import { auth } from "@clerk/nextjs/server";
 import { Prisma } from "@/generated/prisma/client";
-import prisma from "@/db/prisma";
+import { prisma } from "@/lib/db";
 
 export async function getCurrentTherapist() {
   const { userId } = await auth();

@@ -1,4 +1,4 @@
-model Patient {
+model Client {
   id          String   @id @default(cuid())
 
   therapistId String
@@ -10,4 +10,5 @@ model Patient {
   phone       String?
 
   createdAt   DateTime @default(now())
+  updatedAt   DateTime @default(now()) @updatedAt
 }

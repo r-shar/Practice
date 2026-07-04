@@ -28,7 +28,25 @@ Every major decision is documented in this repository—not because I think it's
 
 ## Current architecture
 
-(To be filled in as the project evolves.)
+Monolithic Next.js app with PostgreSQL and Clerk. See [ADR 0001](docs/adr/0001-foundation-tech-stack.md) for stack decisions.
+
+```
+src/
+├── app/                 # Routes and layouts (App Router)
+│   └── (dashboard)/     # Auth-protected pages (route group, no URL prefix)
+├── components/
+│   └── ui/              # shadcn/ui primitives
+├── lib/
+│   ├── auth.ts          # Clerk session → Therapist record
+│   ├── db.ts            # Prisma client singleton
+│   └── utils.ts         # Shared helpers
+└── proxy.ts             # Clerk middleware (Next.js 16)
+
+prisma/                  # Schema (split by domain) and migrations
+docker/                  # Local Postgres for development
+```
+
+**Naming:** `Client` in the database and code, `/clients` in routes — same term everywhere.
 
 ## Roadmap
 

@@ -2,7 +2,11 @@ model Therapist {
   id        String   @id @default(cuid())
   clerkId   String   @unique
 
+  firstName String?
+  lastName String?
+  email String?
+
   createdAt DateTime @default(now())
 
-  patients  Patient[]
+  clients   Client[]
 }
