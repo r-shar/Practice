@@ -43,24 +43,26 @@ export const createClient = async (data: CreateClientInput) => {
 };
 
 export const updateClient = async (id: string, data: UpdateClientInput) => {
-    const therapist = await requireCurrentTherapist();
+    const client = await getClientById(id);
 
-    return prisma.client.updateMany({
-        where: {
-            id,
-            therapistId: therapist.id,
-        },
+    if (!client) {
+        throw new Error("Client not found");
+    }
+
+    return prisma.client.update({
+        where: { id },
         data,
     });
 };
 
 export const deleteClient = async (id: string) => {
-    const therapist = await requireCurrentTherapist();
+    const client = await getClientById(id);
 
-    return prisma.client.deleteMany({
-        where: {
-            id,
-            therapistId: therapist.id,
-        },
+    if (!client) {
+        throw new Error("Client not found");
+    }
+
+    return prisma.client.delete({
+        where: { id },
     });
 };

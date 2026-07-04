@@ -14,5 +14,9 @@ const dateFormatter = new Intl.DateTimeFormat("en", {
 export function formatDate(value: Date | string | null | undefined) {
   if (!value) return "-"
 
-  return dateFormatter.format(new Date(value))
+  const date = new Date(value)
+
+  if (Number.isNaN(date.getTime())) return "-"
+
+  return dateFormatter.format(date)
 }
