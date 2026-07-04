@@ -1,15 +1,22 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import ClientTable from "./client-table";
-import { getClients } from "@/server/clients";
 import { Button } from "./ui/button";
 import Link from "next/link";
+import type { ClientListItem } from "@/lib/types";
 
 type DashboardProps = {
-  therapistId: string;
+  therapist: {
+    firstName: string | null;
+    lastName: string | null;
+  };
+  clients: ClientListItem[];
 };
 
-export default async function Dashboard({ therapistId }: DashboardProps) {
-  const clients = await getClients();
+export default function Dashboard({ therapist, clients }: DashboardProps) {
+  const therapistName = [therapist.firstName, therapist.lastName]
+    .filter(Boolean)
+    .join(" ");
+
   return (
     <div>
       <Card>
@@ -17,10 +24,7 @@ export default async function Dashboard({ therapistId }: DashboardProps) {
           <CardTitle>Dashboard</CardTitle>
         </CardHeader>
         <CardContent>
-          <p>Welcome back.</p>
-          <p className="text-muted-foreground text-sm mt-2">
-            Therapist ID: {therapistId}
-          </p>
+          <p>Welcome back{therapistName ? `, ${therapistName}` : ""}.</p>
         </CardContent>
         <div className="flex justify-end">
           <Button asChild>

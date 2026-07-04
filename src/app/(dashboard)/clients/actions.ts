@@ -12,5 +12,5 @@ export async function createClientAction(values: ClientFormValues) {
     phone: values.phone || undefined,
   });
 
-  redirect("/clients");
+  redirect("/"); // temporarily redirect to home directory until client management is implemented
 }

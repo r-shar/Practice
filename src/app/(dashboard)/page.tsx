@@ -1,8 +1,8 @@
 import Dashboard from "@/components/dashboard";
-import { requireCurrentTherapist } from "@/lib/auth";
+import { getDashboardData } from "@/server/dashboard";
 
 export default async function DashboardPage() {
-  const therapist = await requireCurrentTherapist();
+  const { therapist, clients } = await getDashboardData();
 
-  return <Dashboard therapistId={therapist.id} />;
+  return <Dashboard therapist={therapist} clients={clients} />;
 }
