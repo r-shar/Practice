@@ -1,0 +1,32 @@
+model Appointment {
+    id String @id @default(cuid())
+
+    // metadata 
+    startDateTime DateTime
+    endDateTime DateTime
+    status AppointmentStatus(@default(SCHEDULED))
+    meetingUrl String?
+
+    // relations
+    participants AppointmentParticipant[]
+    meetingProvider MeetingProvider?
+
+    // timestamps
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+}
+
+enum AppointmentStatus {
+    SCHEDULED
+    CONFIRMED
+    CANCELLED
+    COMPLETED
+    NO_SHOW
+}
+
+enum MeetingProvider {
+    ZOOM
+    GOOGLE_MEET
+    PHONE
+    MANUAL
+}
